@@ -675,20 +675,20 @@ def payReservation(request, res_Id):
 def deleteReservation(request, res_Id):
     t_rezervacia.objects.get(id=res_Id).delete()
     messages.success(request, "Reservation canceled")
-    return redirect('festivals-profile')
+    return redirect('festivals-home')
 
 
 def confirmReservation(request, res_Id):
     reservation = t_rezervacia.objects.get(id=res_Id)
     reservation.stav = "Ready to pick up"
     reservation.save()
-    return redirect('festivals-profile')
+    return redirect('festivals-home')
 
 def completeReservation(request, res_Id):
     reservation = t_rezervacia.objects.get(id=res_Id)
     reservation.stav = "Completed"
     reservation.save()
-    return redirect('festivals-profile')
+    return redirect('festivals-home')
 
 
 def showInterprets(request):
@@ -746,3 +746,24 @@ def editInterpret(request, interpret_Id):
     else:
         form = NewInterpretForm(instance=interpret)
         return render(request, 'festivals/editInterpret.html', {'form': form, 'interpret': interpret})
+    
+    
+def showOrders(request):
+    if request.method == 'POST':
+        print(request.POST['user_email'])
+        orders = t_rezervacia.objects.filter(email__contains=request.POST['user_email'])
+        print(orders)
+        festivals = []
+        for order in orders:
+            reservations = r_rezervacia_na.objects.filter(id_rezervacie=order)
+            first = True
+            for res in reservations:
+                if first:
+                    print("mam",res.id_listku.id_festival.nazov)
+                    festivals += [res.id_listku.id_festival]
+                    first = False
+        content = zip(orders, festivals)
+        print(content)
+        return render(request, 'festivals/showOrders.html', {'content': content})
+    else: 
+        return render(request, 'festivals/showOrders.html')
