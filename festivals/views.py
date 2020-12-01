@@ -194,7 +194,7 @@ def show(request, festival_Id):
 def showStage(request, festival_Id, stage_Id):
     festival = t_festival.objects.get(id=festival_Id)
     stage = t_stage.objects.get(id=stage_Id)
-    vystupujuci = r_vystupuje_na.objects.filter(id_stage=stage)
+    vystupujuci = r_vystupuje_na.objects.filter(id_stage=stage).order_by('zaciatok')
     first = True
     queryPerf = Q(id=-1)
     for item in vystupujuci:
