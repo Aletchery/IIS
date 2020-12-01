@@ -14,20 +14,6 @@ class Additional(models.Model):
 # add with: https://gist.github.com/bee-keeper/9857973
 
 
-"""
-class t_uzivatel(models.Model):
-    # id is automatic PK
-    email = models.EmailField()
-    meno = models.CharField(max_length=255)
-    priezvisko = models.CharField(max_length=255)
-    heslo = models.CharField(max_length=255)
-
-    # row identification
-    def __str__(self):
-        return self.meno[0] + ". " + self.priezvisko
-"""
-
-
 class t_festival(models.Model):
     # id is automatic PK
     nazov = models.CharField(max_length=255)
@@ -94,9 +80,6 @@ class t_rezervacia(models.Model):
     email = models.EmailField(max_length=254)
     majitel = models.ForeignKey(User, on_delete=models.CASCADE, blank=True,null=True)
     
-    # row identification
-    def __str__(self):
-        return self.majitel.meno[0] + ". " + self.majitel.priezvisko + ": " + self.typ
 
 
 class t_listok(models.Model):
