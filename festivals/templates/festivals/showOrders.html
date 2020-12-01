@@ -1,0 +1,29 @@
+{% extends "festivals/header.html" %}
+{% load template_auth %}
+{% block content %}
+<div class="container text-center jumbotron">
+    <h2>
+        Reservations:
+    </h2>
+    <form class="form-inline" action="{% url 'festivals-show-orders' %}" method="POST">
+            {% csrf_token %}
+        <div style="width: 30%; margin: 15px auto;">
+            <input type="text" class="form-control" name="user_email" placeholder="Find order by email...">
+            <button class="btn btn-sm btn-primary" type="sumbit">Search <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+</svg></button>
+        </div>
+    </form>
+    
+    {% if content %}
+     <div class="row text-center" >
+             <dl>
+             {% for myOrder,festival in content %}
+                 <dt><a href="{% url 'festivals-show-reservation' festival_Id=festival.id res_Id=myOrder.id %}">Reservation {{ myOrder.id }} for {{festival.nazov}} </a></dt>
+             {% endfor %}
+             </dl>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
