@@ -338,7 +338,7 @@ def manageProgram(request, festival_Id, stage_Id):
         else:
             query.add(Q(id=item.id_interpret.id), Q.OR)
     
-    vystupujuci = r_vystupuje_na.objects.filter(id_stage=stage)
+    vystupujuci = r_vystupuje_na.objects.filter(id_stage=stage).order_by('zaciatok')
     first = True
     queryPerf = Q(id=-1)
     for item in vystupujuci:
