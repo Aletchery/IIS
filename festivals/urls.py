@@ -26,6 +26,7 @@ urlpatterns = [
     path('editInterprets/add/<int:festival_Id>/<int:interpret_Id>/', views.addInterpretToFestival, name='festivals-add-interpret-to-festival'),
     path('editInterprets/delete/<int:festival_Id>/<int:interpret_Id>/', views.deleteInterpretFromFestival, name='festivals-delete-interpret-festival'),
 
+    
     path('users/show/', views.showUsers, name='festivals-showUsers'),
     path("users/edit/profile/<int:user_Id>/", views.editProfile, name='festivals-edit-profile'),
     path('profile/<int:user_Id>/add_role/<str:role>/', views.add_role, name='add-role'),
@@ -35,6 +36,7 @@ urlpatterns = [
     path('show/createTicket/<int:festival_Id>/', views.createTicketFestival, name='festivals-create-ticket-festival'),
     path('show/edit/ticket/<int:festival_Id>/<int:ticket_Id>/', views.editTicketFestival, name='festivals-edit-ticket'),
 
+    path('show/orders/', views.showOrders, name="festivals-show-orders"),
     path('show/buy/<int:festival_Id>/',views.buyTicketPage, name='festivals-buy-ticket'),
     path('profile/show/reservation/<int:res_Id>/<int:festival_Id>/', views.showReservation, name='festivals-show-reservation'),
     path('pay/reservation/<int:res_Id>/', views.payReservation, name='festivals-pay-reservation'),
